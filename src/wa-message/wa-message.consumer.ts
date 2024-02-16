@@ -20,7 +20,15 @@ waNumbers.forEach((waNumber) => {
     })
   }
 
-  const client = new Client(clientConfig)
+  const client = new Client({
+    ...clientConfig,
+    puppeteer: {
+      headless: true,
+      args: [
+        '--no-sandbox'
+      ]
+    }
+  })
 
   client.on('qr', (qr) => {
     qrcode.generate(qr, { small: true })
